@@ -28,8 +28,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	Font titleFont;
 	Font subtitleFont;
-	Rocketship r;
-	// LeagueInvaders l;
+	Cow r;
+	CowAttack l;
 
 	int rX = 250;
 	int rY = 700;
@@ -40,7 +40,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	
 	
 	
-	// public static BufferedImage alienImg;
+	 public static BufferedImage alienImg;
 
      public static BufferedImage cowImg;
 
@@ -56,7 +56,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		titleFont = new Font("Arial", Font.PLAIN, 48);
 		subtitleFont = new Font("Arial", Font.PLAIN, 25);
 
-		r = new Rocketship(rX, rY, 80, 60);
+		r = new Cow(rX, rY, 80, 60);
 		// l = new LeagueInvaders();
 
 		ob = new ObjectManager(r);
@@ -66,12 +66,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		
 		 try {
 
-             //alienImg = ImageIO.read(this.getClass().getResourceAsStream("badjet.png"));
+             alienImg = ImageIO.read(this.getClass().getResourceAsStream("chicken.png"));
 
              cowImg = ImageIO.read(this.getClass().getResourceAsStream("cow.png"));
 
              
-             fieldImg = ImageIO.read(this.getClass().getResourceAsStream("fields.png"));
+             fieldImg = ImageIO.read(this.getClass().getResourceAsStream("background.png"));
 
      } catch (IOException e) {
 
@@ -102,6 +102,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		ob.checkCollision();
 		ob.purgeObjects();  
 		ob.getScore();
+		//b.update();
 		
 		
 		if (ob.toEndState() == true) {
@@ -212,7 +213,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			
 		
 			if (currentState == MENU_STATE) {
-				r = new Rocketship(rX, rY, 50, 50);
+				r = new Cow(rX, rY, 50, 50);
 				
 				ob = new ObjectManager(r);
 				
@@ -224,24 +225,28 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 		if (e.getKeyCode() == KeyEvent.VK_UP) { // I need to make it more smooth
 
-			r.speedY = -5;
+			if (r.y == 700) {
+				r.speedY = -18;
+			}
+			
+			
 
 		}
 
 		else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			r.speedY = 5;
+			//r.speedY = 5;
 		}
 
 		else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 
-			r.speedX = 5;
+			//r.speedX = 5;
 			
 
 		}
 
 		else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 
-			r.speedX = -5;
+			//r.speedX = -5;
 			
 			
 		}
@@ -261,9 +266,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		System.out.println("Wow!!");
 
 		if (e.getKeyCode() == KeyEvent.VK_UP) { // I need to make it more smooth
-
-			r.speedY = 0;
-
+			
+			
+			
 		}
 
 		else if (e.getKeyCode() == KeyEvent.VK_DOWN) {

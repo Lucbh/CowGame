@@ -1,16 +1,16 @@
-/*
- * 
- package Invaders;
+package Invaders;
+
+
 
 
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Alien extends GameObject {
+public class Chicken extends GameObject {
 
 	
 
-	public Alien(int bob, int sally, int jill, int susan) {
+	public Chicken(int bob, int sally, int jill, int susan) {
 
 		super(bob, sally, jill, susan);
 
@@ -26,7 +26,7 @@ public class Alien extends GameObject {
 	
 	public void update() {
 		super.update();
-		y+=5;	
+		x-=8;	
 		
 	}
 	
@@ -38,5 +38,3 @@ public class Alien extends GameObject {
 
 
 }
-
-*/

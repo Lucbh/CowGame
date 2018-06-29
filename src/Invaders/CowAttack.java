@@ -4,7 +4,7 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
-public class LeagueInvaders {
+public class CowAttack {
 
 	JFrame a;
 
@@ -14,7 +14,7 @@ public class LeagueInvaders {
 
 	GamePanel b;
 
-	public LeagueInvaders() {
+	public CowAttack() {
 
 		a = new JFrame("League Invaders");
 		b = new GamePanel();
@@ -25,7 +25,7 @@ public class LeagueInvaders {
 
 		// Don't know how to make constructors yet
 
-		LeagueInvaders bob = new LeagueInvaders();
+		CowAttack bob = new CowAttack();
 
 		bob.setup();
 

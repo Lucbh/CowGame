@@ -6,30 +6,31 @@ import java.util.Random;
 
 public class ObjectManager {
 
-	Rocketship rocket;
+	Cow rocket;
 
 	ArrayList<Projectile> p;
-	//ArrayList<Alien> a;
+	ArrayList<Chicken> a;
 	long enemyTimer;
 	int enemySpawnTime;
 	int score;
-	
+	Background b;
 
-	public ObjectManager(Rocketship rocket) {
+	public ObjectManager(Cow rocket) {
 
 		this.rocket = rocket;
 	
 		p = new ArrayList<Projectile>();
-		//a = new ArrayList<Alien>();	
+		a = new ArrayList<Chicken>();	
 		enemyTimer = 0;
 		enemySpawnTime = 1000;
 		score = 0;
-		
+		b = new Background(0, 0, 0, 0);
 	}
 
 	public void update() {
-
+		b.update();
 		rocket.update();
+		
 
 		for (int x = 0; x < p.size(); x++) {
 
@@ -37,31 +38,31 @@ public class ObjectManager {
 
 		}
 		
-		/*for (int x = 0; x < a.size(); x++) {
+		for (int x = 0; x < a.size(); x++) {
 
 			a.get(x).update();
 
 		}
-		*/
+		
 
 	}
 
 	public void draw(Graphics g) {
-
+		b.draw(g);
 		rocket.draw(g);
-
+		
 		for (int x = 0; x < p.size(); x++) {
 
 			p.get(x).draw(g);
 
 		}
 		
-		/*for (int x = 0; x < a.size(); x++) {
+		for (int x = 0; x < a.size(); x++) {
 
 			a.get(x).draw(g);
 
 		}
-		*/
+		
 
 	}
 
@@ -70,18 +71,19 @@ public class ObjectManager {
 
 	}
 	
-	/*public void addAlien(Alien a1) {
+	public void addAlien(Chicken a1) {
 		
 		a.add(a1);
 	}
-	*/
+	
 	
 
 	public void manageEnemies(){ //I haven't made them turn and stuff
 		
 	        if(System.currentTimeMillis() - enemyTimer >= enemySpawnTime){
-	                //addAlien(new Alien(new Random().nextInt(1000), 0, 50, 50));
-
+	                addAlien(new Chicken(/*new Random().nextInt(1000)*/ 1000, 700, 50, 50));
+	                enemySpawnTime = new Random().nextInt(1200);
+	                enemySpawnTime += 800;
 	enemyTimer = System.currentTimeMillis();
 	        }
 	}
@@ -94,11 +96,11 @@ public class ObjectManager {
 			}
 		}
 		
-		//for (int i = 0; i < a.size(); i++) {
-		//	if (!a.get(i).isAlive) {
-		//		a.remove(i);
-		//	}
-		//}
+		for (int i = 0; i < a.size(); i++) {
+			if (!a.get(i).isAlive) {
+				a.remove(i);
+			}
+		}
 		
 		if (!rocket.isAlive) {
 			
@@ -110,7 +112,7 @@ public class ObjectManager {
 	
 	public void checkCollision() {
 		
-		/*for(Alien al : a){
+		for(Chicken al : a){
 
 	        if(rocket.collisionBox.intersects(al.collisionBox)){
 
@@ -132,7 +134,7 @@ public class ObjectManager {
 
 	}
 		
-	*/
+	
 		
 		
 	}
@@ -143,7 +145,7 @@ public class ObjectManager {
 		
 		if (rocket.isAlive == false) {
 			rocket.isAlive = true;
-			//a.clear();
+			a.clear();
 			
 			
 			
