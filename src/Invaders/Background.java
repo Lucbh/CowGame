@@ -11,8 +11,7 @@ public class Background extends GameObject{
 	int backwards = 0;
 	
 		
-		// TODO Auto-generated constructor stub
-	
+		
 	
 		
 	
@@ -28,7 +27,12 @@ public class Background extends GameObject{
 		
 		
 
-		backwards-=5;
+		backwards-=6;
+		
+		if (backwards <= -4096) {
+			
+			backwards =  0;
+		}
 
 	
 	}
@@ -37,6 +41,7 @@ public class Background extends GameObject{
 		
 		
 		 g.drawImage(GamePanel.fieldImg, backwards, 0, 4096, 1000, null);
+		 g.drawImage(GamePanel.fieldImg, backwards + 4096, 0, 4096, 1000, null);
 	
 		 
 		

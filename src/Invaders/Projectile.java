@@ -50,10 +50,13 @@ public class Projectile extends GameObject  implements ActionListener, KeyListen
 
 	public void draw(Graphics g) {
 
-		g.setColor(Color.WHITE);
+		//g.setColor(Color.WHITE);
 
-		g.fillRect(x, y + 10, width, height);
-
+		//g.fillRect(x, y + 10, width, height);
+		
+		
+		g.drawImage(GamePanel.bulletImg, x, y + 10, width, height, null);
+		
 	}
 
 		public void keyPressed(KeyEvent e) {

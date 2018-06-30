@@ -44,17 +44,19 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
      public static BufferedImage cowImg;
 
-    // public static BufferedImage bulletImg;
+     public static BufferedImage bulletImg;
 
      public static BufferedImage fieldImg;
 
 
 
 	public GamePanel() {
+		
+	
 
 		time = new Timer(1000 / 60, this);
-		titleFont = new Font("Arial", Font.PLAIN, 48);
-		subtitleFont = new Font("Arial", Font.PLAIN, 25);
+		titleFont = new Font("Arial", Font.BOLD, 48);
+		subtitleFont = new Font("Arial", Font.BOLD, 25);
 
 		r = new Cow(rX, rY, 80, 60);
 		// l = new LeagueInvaders();
@@ -70,6 +72,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
              cowImg = ImageIO.read(this.getClass().getResourceAsStream("cow.png"));
 
+             bulletImg = ImageIO.read(this.getClass().getResourceAsStream("droplet.png"));
              
              fieldImg = ImageIO.read(this.getClass().getResourceAsStream("background.png"));
 
@@ -123,10 +126,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 		g.setFont(titleFont);
 		g.setColor(Color.RED);
-		g.drawString("COW ATTACK", 25, 300);
+		g.drawString("COW ATTACK", 325, 300);
 		g.setFont(subtitleFont);
-		g.drawString("Press ENTER to start", 130, 500);
-		g.drawString("Press SPACE for instructions", 90, 700);
+		g.drawString("Press ENTER to start",360, 500);
+		
 	}
 
 	public void drawGameState(Graphics g) {
@@ -145,10 +148,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 		g.setFont(titleFont);
 		g.setColor(Color.BLACK);
-		g.drawString("YOU DIED", 120, 300);
+		g.drawString("YOU DIED", 370, 300);
 		g.setFont(subtitleFont);
-		g.drawString("YOU GOT " + ob.getScore() + " KILLS", 130, 500);
-		g.drawString("Press ENTER to start over", 100, 700);
+		g.drawString("YOU GOT " + ob.getScore() + " KILLS", 390, 500);
+		g.drawString("Press ENTER to start over", 350, 700);
 
 	}
 

@@ -102,11 +102,7 @@ public class ObjectManager {
 			}
 		}
 		
-		if (!rocket.isAlive) {
-			
-			//currentState = END_STATE;
-			
-		}
+		
 		
 	}
 	
