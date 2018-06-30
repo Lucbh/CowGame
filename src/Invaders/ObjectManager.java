@@ -10,8 +10,11 @@ public class ObjectManager {
 
 	ArrayList<Projectile> p;
 	ArrayList<Chicken> a;
+	ArrayList<Goat> gt;
 	long enemyTimer;
 	int enemySpawnTime;
+	long goatTimer;
+	int goatSpawnTime;
 	int score;
 	Background b;
 
@@ -21,8 +24,11 @@ public class ObjectManager {
 	
 		p = new ArrayList<Projectile>();
 		a = new ArrayList<Chicken>();	
+		gt = new ArrayList<Goat>();
 		enemyTimer = 0;
 		enemySpawnTime = 1000;
+		goatTimer = 0;
+		goatSpawnTime = 1000;
 		score = 0;
 		b = new Background(0, 0, 0, 0);
 	}
@@ -44,6 +50,10 @@ public class ObjectManager {
 
 		}
 		
+		for (int x = 0; x < gt.size(); x++) {
+			gt.get(x).update();
+		}
+		
 
 	}
 
@@ -63,6 +73,12 @@ public class ObjectManager {
 
 		}
 		
+		for (int x = 0; x < gt.size(); x++) {
+
+			gt.get(x).draw(g);
+
+		}
+		
 
 	}
 
@@ -76,16 +92,42 @@ public class ObjectManager {
 		a.add(a1);
 	}
 	
+	public void addGoat(Goat g1) {
+		
+		gt.add(g1);
+		
+	}
+	
 	
 
 	public void manageEnemies(){ //I haven't made them turn and stuff
 		
 	        if(System.currentTimeMillis() - enemyTimer >= enemySpawnTime){
+	        	
 	                addAlien(new Chicken(/*new Random().nextInt(1000)*/ 1000, 700, 50, 50));
-	                enemySpawnTime = new Random().nextInt(1200);
-	                enemySpawnTime += 800;
+	                enemySpawnTime = new Random().nextInt(1300);
+	                enemySpawnTime += 1000;
+	               
+	                
 	enemyTimer = System.currentTimeMillis();
+	
 	        }
+	        
+	        if(System.currentTimeMillis() - goatTimer >= goatSpawnTime){
+	        	
+	        
+	        	
+	        	
+	        	
+	        	
+                goatSpawnTime = new Random().nextInt(2000);
+                goatSpawnTime += 2000;
+                addGoat(new Goat(1000,700,50,50));
+                
+                
+                goatTimer = System.currentTimeMillis();
+
+        }
 	}
 	
 	public void purgeObjects() { // Have no idea what this does
@@ -99,6 +141,11 @@ public class ObjectManager {
 		for (int i = 0; i < a.size(); i++) {
 			if (!a.get(i).isAlive) {
 				a.remove(i);
+			}
+		}
+		for (int i = 0; i < gt.size(); i++) {
+			if (!gt.get(i).isAlive) {
+				gt.remove(i);
 			}
 		}
 		
@@ -125,6 +172,33 @@ public class ObjectManager {
 		                System.out.println("ALIENISDEAD");
 		                score++;
 		        }
+	        	 
+	        
+	        	
+	        }
+	        
+	        for (Goat gl : gt) {
+	        	
+	        	if(rocket.collisionBox.intersects(gl.collisionBox)){
+
+	                rocket.isAlive = false;
+	                System.out.println("ROCKETISDEAD");
+	        }
+	        	
+	        	for (Projectile pl : p) {
+	        		
+	        		 if(pl.collisionBox.intersects(gl.collisionBox)){
+
+	        			 	rocket.isAlive = false;
+			                System.out.println("YOUAREDEAD");
+			            
+			        }
+	        		
+	        	}
+	        	
+	        	
+	        	 
+	        
 	        	
 	        }
 
@@ -142,6 +216,7 @@ public class ObjectManager {
 		if (rocket.isAlive == false) {
 			rocket.isAlive = true;
 			a.clear();
+			gt.clear();
 			
 			
 			

@@ -55,7 +55,7 @@ public class Projectile extends GameObject  implements ActionListener, KeyListen
 		//g.fillRect(x, y + 10, width, height);
 		
 		
-		g.drawImage(GamePanel.bulletImg, x, y + 10, width, height, null);
+		g.drawImage(GamePanel.bulletImg, x, y + 25, width, height, null);
 		
 	}
 

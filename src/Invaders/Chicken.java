@@ -14,10 +14,10 @@ public class Chicken extends GameObject {
 
 		super(bob, sally, jill, susan);
 
-		x = bob;
-		y = sally;
-		width = jill;
-		height = susan;
+		//x = bob;
+		//y = sally;
+		//width = jill;
+		//height = susan;
 
 		
 

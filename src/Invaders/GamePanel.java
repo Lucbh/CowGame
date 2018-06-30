@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -37,7 +38,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	ObjectManager ob;
 	
-	
+	boolean jump;
 	
 	
 	 public static BufferedImage alienImg;
@@ -47,6 +48,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
      public static BufferedImage bulletImg;
 
      public static BufferedImage fieldImg;
+     
+     public static BufferedImage goatImg;
 
 
 
@@ -64,7 +67,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		ob = new ObjectManager(r);
 		
 		
-		
+		jump =true;
 		
 		 try {
 
@@ -75,6 +78,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
              bulletImg = ImageIO.read(this.getClass().getResourceAsStream("droplet.png"));
              
              fieldImg = ImageIO.read(this.getClass().getResourceAsStream("background.png"));
+             
+             goatImg = ImageIO.read(this.getClass().getResourceAsStream("goat.png"));
 
      } catch (IOException e) {
 
@@ -112,6 +117,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			currentState = END_STATE;
 			
 		}
+		
+		
 	}
 
 	public void updateEndState() {
@@ -120,25 +127,31 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	public void drawMenuState(Graphics g) {
 
-		g.setColor(Color.DARK_GRAY);
+		g.setColor(Color.WHITE);
 
 		g.fillRect(0, 0, 1000, 1000);
 
 		g.setFont(titleFont);
 		g.setColor(Color.RED);
-		g.drawString("COW ATTACK", 325, 300);
+		g.drawString("CHICK-FIL-ATTACK", 280, 300);
 		g.setFont(subtitleFont);
 		g.drawString("Press ENTER to start",360, 500);
+		g.drawString("Press SPACE for instructions", 320, 700);
 		
 	}
 
 	public void drawGameState(Graphics g) {
 
-		g.setColor(Color.BLACK);
+		
+		
 
 		g.fillRect(0, 0, 1000, 1000);
 
 		ob.draw(g);
+		
+		g.setFont(titleFont);
+		g.setColor(Color.BLACK);
+		g.drawString("SHOOT THE CHICKENS!!", 200, 200);
 	}
 
 	public void drawEndState(Graphics g) {
@@ -150,7 +163,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setColor(Color.BLACK);
 		g.drawString("YOU DIED", 370, 300);
 		g.setFont(subtitleFont);
-		g.drawString("YOU GOT " + ob.getScore() + " KILLS", 390, 500);
+		g.drawString("YOU MADE " + ob.getScore() + " CHICKEN SANDWICHES", 300, 500);
 		g.drawString("Press ENTER to start over", 350, 700);
 
 	}
@@ -228,8 +241,15 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 		if (e.getKeyCode() == KeyEvent.VK_UP) { // I need to make it more smooth
 
+			if (r.y <= 700 && r.y >= 550 && jump == true) {
+				r.speedY = -15;
+				jump = false;
+			}
+			
 			if (r.y == 700) {
-				r.speedY = -18;
+				
+				jump = true;
+				r.speedY =-15;
 			}
 			
 			
@@ -255,10 +275,21 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+			
+			
+			if (currentState == MENU_STATE) {
+				
+				JOptionPane.showMessageDialog(null, "Try and shoot as many chickens as you can!\n "
+						+ "Watch out for goats. Don't shoot them! \n"
+						+ "Plan you shots wisely! \n"
+						+ "Good luck!");
+			}
 
 			ob.addProjectile(new Projectile(r.x + 20, r.y, 10, 10));
 
 		}
+		
+		
 
 	}
 
