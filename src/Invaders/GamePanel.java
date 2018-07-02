@@ -62,7 +62,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		subtitleFont = new Font("Arial", Font.BOLD, 25);
 
 		r = new Cow(rX, rY, 80, 60);
-		// l = new LeagueInvaders();
+		
 
 		ob = new ObjectManager(r);
 		
@@ -106,11 +106,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void updateGameState() {
 
 		ob.update();
-		ob.manageEnemies();
-		ob.checkCollision();
-		ob.purgeObjects();  
 		ob.getScore();
-		//b.update();
+		ob.checkCollision();
+		ob.manageEnemies();
+		ob.purgeObjects();  
+		
+		
 		
 		
 		if (ob.toEndState() == true) {
@@ -193,7 +194,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 		repaint();
 
-		// System.out.println("It works!!!");
+		
 
 		if (currentState == MENU_STATE) {
 
@@ -257,19 +258,19 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 
 		else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			//r.speedY = 5;
+			
 		}
 
 		else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 
-			//r.speedX = 5;
+			
 			
 
 		}
 
 		else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 
-			//r.speedX = -5;
+			
 			
 			
 		}
@@ -279,7 +280,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			
 			if (currentState == MENU_STATE) {
 				
-				JOptionPane.showMessageDialog(null, "Try and shoot as many chickens as you can!\n "
+				JOptionPane.showMessageDialog(null, " Press Space to shoot and the Up-Arrow to Jump\n"
+						+ "Press the Up-Arrow 2 times to double jump. You'll need it!\n"
+						+ "Try and shoot as many chickens as you can!\n "
 						+ "Watch out for goats. Don't shoot them! \n"
 						+ "Plan you shots wisely! \n"
 						+ "Good luck!");

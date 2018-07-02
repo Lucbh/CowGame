@@ -13,10 +13,7 @@ public class GameObject {
 	Rectangle collisionBox;
 
 	public GameObject(int a, int b, int c, int d) {
-		/*
-		 * don't know how to " Add parameters to your constructor that match the member
-		 * variables and use these to initialize the member variables."
-		 */
+
 
 		x = a;
 		y = b;
