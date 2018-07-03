@@ -1,13 +1,15 @@
 package Invaders;
-
+import java.applet.AudioClip;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.JApplet;
+
 public class ObjectManager {
 
 	Cow rocket;
-
+	AudioClip sound; 
 	ArrayList<Projectile> p;
 	ArrayList<Chicken> a;
 	ArrayList<Goat> gt;
@@ -21,7 +23,7 @@ public class ObjectManager {
 	public ObjectManager(Cow rocket) {
 
 		this.rocket = rocket;
-	
+		sound = JApplet.newAudioClip(getClass().getResource("chickensound1.wav"));
 		p = new ArrayList<Projectile>();
 		a = new ArrayList<Chicken>();	
 		gt = new ArrayList<Goat>();
@@ -170,10 +172,11 @@ public class ObjectManager {
 		                al.isAlive = false;
 		                pl.isAlive = false;
 		                System.out.println("ALIENISDEAD");
+		                sound.play();
 		                score++;
 		        }
 	        	 
-	        
+	        }
 	        	
 	        }
 	        
@@ -203,7 +206,7 @@ public class ObjectManager {
 	        }
 
 	           
-	}
+	
 		
 	
 		

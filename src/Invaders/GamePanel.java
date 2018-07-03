@@ -1,5 +1,6 @@
 package Invaders;
 
+import java.applet.AudioClip;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -11,9 +12,12 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JApplet;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+
+import java.applet.AudioClip;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
@@ -40,6 +44,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	
 	boolean jump;
 	
+	int highscore;
 	
 	 public static BufferedImage alienImg;
 
@@ -51,12 +56,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
      
      public static BufferedImage goatImg;
 
+ 
+	
+     AudioClip sound; 
+	
 
 
 	public GamePanel() {
 		
 	
-
+		sound = JApplet.newAudioClip(getClass().getResource("iwannagotochick.wav"));
 		time = new Timer(1000 / 60, this);
 		titleFont = new Font("Arial", Font.BOLD, 48);
 		subtitleFont = new Font("Arial", Font.BOLD, 25);
@@ -68,6 +77,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		
 		
 		jump =true;
+		
+		highscore = 0;
 		
 		 try {
 
@@ -94,7 +105,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void startGame() {
 
 		time.start();
-
+		sound.play();
 	}
 
 	public void updateMenuState() {
@@ -123,6 +134,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public void updateEndState() {
+		
+		getHighscore();
 
 	}
 
@@ -153,6 +166,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setFont(titleFont);
 		g.setColor(Color.BLACK);
 		g.drawString("SHOOT THE CHICKENS!!", 200, 200);
+		g.drawString("" + ob.score, 10, 50);
 	}
 
 	public void drawEndState(Graphics g) {
@@ -166,6 +180,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setFont(subtitleFont);
 		g.drawString("YOU MADE " + ob.getScore() + " CHICKEN SANDWICHES", 300, 500);
 		g.drawString("Press ENTER to start over", 350, 700);
+		g.drawString("Highscore: " + highscore, 800, 100);
 
 	}
 
@@ -332,6 +347,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 		System.out.println("Can I finish soon?!");
 
+	}
+	
+	
+	public void getHighscore() {
+		
+		if (ob.score > highscore) {
+			highscore = ob.score;
+		}
 	}
 
 }
